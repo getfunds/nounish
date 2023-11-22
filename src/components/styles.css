@@ -1,0 +1,98 @@
+@media (min-width: 640px) {
+    .containerStyle {
+      border-radius: 0.375rem;
+    }
+  
+    .tableStyle {
+      border-radius: 0.375rem;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+  
+    .headerCellStyle {
+      border-radius: 0.375rem;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    }
+  }
+  
+  .containerStyle {
+    position: relative;
+    overflow-x: auto;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .tableStyle {
+    width: 100%;
+    font-size: 0.875rem;
+    text-align: left;
+    color: blue-100;
+    background: gray-700;
+  }
+  
+  .headerCellStyle {
+    font-size: 0.80rem;
+    color: Black;
+    text-transform: uppercase;
+    background-color: gray-700;
+    padding: 0.75rem 1.5rem;
+  }
+  
+  .cellStyle {
+    padding: 0.75rem 1.5rem;
+    background: white;
+  }
+  
+  .columnsStyle {
+    background-color: #f0f5fa;
+    border-bottom: 10px solid;
+    box-shadow: inset 1px 1px 1px #707070;
+  }
+  
+  .columnStyle {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    background-color: gray-800;
+    color: blue-50;
+    white-space: nowrap;
+  }
+  
+  .flexCenterStyle {
+    display: flex;
+    font-size: 2rem;
+    margin-bottom: 0.80rem;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .centeredContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .loader {
+    margin: 20px;
+  }
+  
+  .SmtextStyle {
+    font-size: 0.8rem;
+    color: gray;
+  }
+  
+  .container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .imgContainer {
+    margin-right: 8px;
+  }
+  
+  .textContainer {
+    
+    flex-direction: column;
+    margin-top: 0.1rem;
+    margin-left: 0.1rem;
+  }
+  
