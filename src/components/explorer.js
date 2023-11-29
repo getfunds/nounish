@@ -16,7 +16,7 @@ const Explorer = () => {
   useEffect(() => {
     const initWeb3 = async () => {
       try {
-        const infuraUrl = 'https://eth-mainnet.g.alchemy.com/v2/jz4_-Hk_Fxcz5szF3ba_ymBJVJQTUhOQ'; 
+        const infuraUrl = 'https://eth-mainnet.g.alchemy.com/v2/o79ANrkWuaUCLNyvFGPbDHBe-mYFswAk'; 
         const web3Instance = new Web3(new Web3.providers.HttpProvider(infuraUrl));
         setWeb3(web3Instance);
       } catch (error) {
@@ -53,12 +53,12 @@ const Explorer = () => {
     }
   }, [web3, loaded]);
 
-  const fetchIpfsContent = async (ipfsLink) => {
+  const fetchIpfsContent = async (ipfsLink, contractAddress) => {
     try {
       const ipfsUrl = `https://ipfs.io/ipfs/${ipfsLink.replace('ipfs://', '')}`;
       const response = await fetch(ipfsUrl);
       const data = await response.json();
-      return data;
+      return { ...data, contractAddress };
     } catch (error) {
       console.error('Error fetching content from IPFS', error);
       return null;
@@ -68,7 +68,7 @@ const Explorer = () => {
   useEffect(() => {
     const fetchIpfsData = async () => {
       try {
-        const ipfsContents = await Promise.all(ipfsData.map(fetchIpfsContent));
+        const ipfsContents = await Promise.all(ipfsData.map(({ ipfsLink, contractAddress }) => fetchIpfsContent(ipfsLink, contractAddress)));
         setIpfsContents(ipfsContents);
         setLoading(false);
       } catch (error) {
@@ -83,7 +83,13 @@ const Explorer = () => {
     const fetchData = async () => {
       try {
         if (contracts.length > 0 && loaded) {
-          const results = await Promise.all(contracts.map(contract => contract.methods.contractURI().call()));
+          const results = await Promise.all(
+            contracts.map(async (contract) => {
+              const contractAddress = contract.options.address;
+              const contractData = await contract.methods.contractURI().call();
+              return { ipfsLink: contractData, contractAddress };
+            })
+          );
           setIpfsData(results);
         }
       } catch (error) {
@@ -99,7 +105,8 @@ const Explorer = () => {
 
   return (
     <div>
-       <div className="flexCenterStyle" > Nounish DAOs </div>
+       <div className="flexCenterStyle" > Nounish DAOs Derivatives </div>
+       <div className="flexCenterStyle">On-chain Explorer</div>
          
          <div className="containerStyle" >
          {loading ? (
@@ -147,16 +154,19 @@ const Explorer = () => {
 
         </div>
           <div className="textContainer">{ipfsContent.name}</div>
+          <p className="address">{ipfsContent.contractAddress}</p>
         </div>
            </th>
                 <td className="textContainer" >
                 {ipfsContent.description}
                 </td>
-                <td className="textContainer">
+                
+<td className="textContainer">
   <a href={ipfsContent.external_link} target="_blank" rel="noopener noreferrer">
     {ipfsContent.external_link}
   </a>
 </td>
+
 
 
             </tr>

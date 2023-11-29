@@ -96,3 +96,9 @@
     margin-left: 0.1rem;
   }
   
+  .address {
+    -webkit-text-fill-color: grey;
+    text-indent: 4%;
+    font-size: 12px;
+
+  }
