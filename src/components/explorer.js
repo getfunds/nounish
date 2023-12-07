@@ -91,6 +91,7 @@ const Explorer = () => {
             })
           );
           setIpfsData(results);
+         
         }
       } catch (error) {
         console.error('Error fetching data from the smart contracts', error);
@@ -143,7 +144,7 @@ const Explorer = () => {
         <div className="imgContainer">
 
         {ipfsContent.image && (
-            <img src={`https://ipfs.io/ipfs/${ipfsContent.image.slice(-46)}`} alt={ipfsContent.name}
+            <img src={`https://ipfs.io/ipfs/${ipfsContent.image?.slice(-46)}`} alt={ipfsContent.name}
             layout="fixed"
             objectFit="contain"
             width={50}
@@ -166,9 +167,6 @@ const Explorer = () => {
     {ipfsContent.external_link}
   </a>
 </td>
-
-
-
             </tr>
              ))}
         </tbody>
